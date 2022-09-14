@@ -23,7 +23,7 @@ func wordtoUTF8(word: String) -> [Int] {
     return intArray
 }
 
-func swaps(value1: Any, value2: Any) {
+func swaped(value1: Any, value2: Any) {
     var finalChange = [Any]()
     
     finalChange.append(value2)
@@ -41,4 +41,4 @@ while let readWord = readLine() {
 }
 
 print(wordtoUTF8(word: words[1]))
-swaps(value1: 32, value2: 11)
+swaped(value1: 32, value2: 11)
