@@ -1,17 +1,38 @@
 var words = [String]()
 var x = 1
 
-func sort(word: String) {
-    let UTF8Key = wordtoUTF8(word: word)
-
+func sort(word: String) -> String {
+    var UTF8Key = wordtoUTF8(word: word)
+    var wordArray = [Character]()
+    
+    for char in word {
+        wordArray.append(char)
+    }
+    
     while x < word.count {
         if UTF8Key[x] < UTF8Key[x-1] {
+            let tempInt = UTF8Key[x]
+            UTF8Key[x] = UTF8Key[x-1]
+            UTF8Key[x-1] = tempInt
+
+            let tempChar = wordArray[x]
+            wordArray[x] = wordArray[x-1]
+            wordArray[x-1] = tempChar
             
-            x -= 1
+            if x == 1 {
+                break
+            } else {
+                x -= 1
+            }
         }
         x += 1
     }
     x = 1
+    var finalString = ""
+    for char in wordArray {
+        finalString += String(char)
+    }
+    return finalString
 }
 
 func wordtoUTF8(word: String) -> [Int] {
@@ -23,15 +44,6 @@ func wordtoUTF8(word: String) -> [Int] {
     return intArray
 }
 
-func swaped(value1: Any, value2: Any) {
-    var finalChange = [Any]()
-    
-    finalChange.append(value2)
-    finalChange.append(value1)
-    
-    print(finalChange)
-}
-
 while let readWord = readLine() {
     if readWord == "" {
         break
@@ -40,5 +52,4 @@ while let readWord = readLine() {
     }
 }
 
-print(wordtoUTF8(word: words[1]))
-swaped(value1: 32, value2: 11)
+print(sort(word: "jefoenefeuhan"))
