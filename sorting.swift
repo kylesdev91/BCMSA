@@ -1,4 +1,5 @@
 var words = [String]()
+var newWords = [String]()
 var x = 1
 
 func sort(word: String) -> String {
@@ -8,9 +9,11 @@ func sort(word: String) -> String {
     for char in word {
         wordArray.append(char)
     }
+
+    var exit = false
     
-    while x < word.count {
-        if UTF8Key[x] < UTF8Key[x-1] {
+    while x < word.count && exit == false {
+        while UTF8Key[x] < UTF8Key[x-1] {
             let tempInt = UTF8Key[x]
             UTF8Key[x] = UTF8Key[x-1]
             UTF8Key[x-1] = tempInt
@@ -18,9 +21,12 @@ func sort(word: String) -> String {
             let tempChar = wordArray[x]
             wordArray[x] = wordArray[x-1]
             wordArray[x-1] = tempChar
-            
-            if x == 1 {
+
+            if x == 1 && word.count <= 2 {
+                exit = true
                 break
+            } else if x == 1 {
+                x += 1
             } else {
                 x -= 1
             }
@@ -45,11 +51,10 @@ func wordtoUTF8(word: String) -> [Int] {
 }
 
 while let readWord = readLine() {
-    if readWord == "" {
-        break
-    } else {
-        words.append(readWord)
-    }
+    words.append(readWord)
 }
 
-print(sort(word: "jefoenefeuhan"))
+for unsorted in words {
+    newWords.append(sort(word: unsorted))
+}
+
